@@ -2,6 +2,17 @@ html,body {
   height: 100%;
 }
 
+button,
+svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+input[type="search"], textarea {
+	outline: none;
+	box-shadow:none !important;
+}
+
 .flex-fill {
     flex:1;
 }

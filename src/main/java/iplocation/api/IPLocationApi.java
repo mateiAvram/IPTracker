@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import iplocation.model.BaseResponse;
+import iplocation.model.IPResponse;
 
 @Path("/app")
 public class IPLocationApi {
@@ -32,14 +33,13 @@ public class IPLocationApi {
 	/**
 	 * API that tests the connection to the server
 	 * 
-	 * @param
 	 * @return BaseResponse
 	 */
 	@POST
 	@Path("/test")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public BaseResponse testConnection() {
+	public BaseResponse test() {
 
 		BaseResponse resp = new BaseResponse();
 
@@ -48,11 +48,29 @@ public class IPLocationApi {
 		} catch (Exception e) {
 
 			resp.setErrorByException(e);
-
 		}
 
 		return resp;
+	}
 
+	@GET
+	@Path("/getIp")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public IPResponse getIp() {
+
+		IPResponse resp = new IPResponse();
+
+		try {
+
+			resp.setIp(httpRequest.getRemoteAddr());
+			
+		} catch (Exception e) {
+
+			resp.setErrorByException(e);
+		}
+
+		return resp;
 	}
 
 }
