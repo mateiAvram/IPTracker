@@ -23,6 +23,6 @@
 	<servlet-mapping>
 		<servlet-name>Jersey REST Service</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
-	</servlet-mapping>  
+	</servlet-mapping> 
   
 </web-app>

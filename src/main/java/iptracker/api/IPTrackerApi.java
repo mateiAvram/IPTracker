@@ -19,7 +19,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import iptracker.business.IPResponseManager;
 import iptracker.model.BaseResponse;
+import iptracker.model.IPRequest;
 import iptracker.model.IPResponse;
 
 @Path("/app")
@@ -53,17 +55,26 @@ public class IPTrackerApi {
 		return resp;
 	}
 
-	@GET
+	@POST
 	@Path("/getIp")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public IPResponse getIp() {
+	public IPResponse getIp(IPRequest req) {
 
 		IPResponse resp = new IPResponse();
+		IPResponseManager iprm = new IPResponseManager();
 
 		try {
-
-			resp.setIp(httpRequest.getRemoteAddr());
+			
+			if(req.getIp() == "") {
+				
+				resp.setIp(httpRequest.getRemoteAddr());
+			} else {
+				
+				resp.setIp(req.getIp());
+			}
+			
+			resp = iprm.getUserIpInfo(resp);
 			
 		} catch (Exception e) {
 

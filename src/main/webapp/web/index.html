@@ -21,9 +21,9 @@
 						</div>
 						<div class="col d-flex justify-content-center" style="align-items: center; padding-bottom: 3%">
 							<div class="input-group w-100">
-					            <input class="form-control form-control-lg border-right-0 border-danger" style="border: 3px solid;" type="search" placeholder="Search" aria-label="Search">
+					            <input id="ipAddress" class="form-control form-control-lg border-right-0 border-danger" style="border: 3px solid;" type="search" placeholder="Search" aria-label="Search">
 					            <span class="input-group-append">
-				                    <button class="btn border-left-0 border-danger" style="outline: none; box-shadow:none !important; background-color: #ffffff; border: 3px solid;" type="button">
+				                    <button id="searchIP" class="btn border-left-0 border-danger" style="outline: none; box-shadow:none !important; background-color: #ffffff; border: 3px solid;" type="button">
 				                    	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M14.53 15.59a8.25 8.25 0 111.06-1.06l5.69 5.69a.75.75 0 11-1.06 1.06l-5.69-5.69zM2.5 9.25a6.75 6.75 0 1111.74 4.547.746.746 0 00-.443.442A6.75 6.75 0 012.5 9.25z"></path></svg>
 				                	</button>
 					            </span>
@@ -45,6 +45,33 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	
 	<script>
+	
+		$(document).ready( function() {
+			
+			function searchIP() {
+				
+				var ip = $("#ipAddress").val();
+				
+				if(ip != null) {
+					window.location.replace("searchIP.html?ip=" + ip);
+				} else {
+					
+					alert("No IP entered");
+				}
+			}
+			
+			$(document).on('keypress',function(e) {
+			    if(e.which == 13) {
+			    	searchIP();
+			    }
+			});
+			
+			$("#searchIP").click(function() {
+				
+		    	searchIP();
+			});
+			
+		});
 	
 	</script>
 
