@@ -10,8 +10,8 @@ public class IPResponse extends BaseResponse{
 
 	public IPResponse() {
 		ip = "null";
-		country = "none";
-		city = "none";
+		country = "unknown";
+		city = "unknown";
 		longitude = "unknown";
 		latitude = "unknown";
 		

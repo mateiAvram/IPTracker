@@ -7,6 +7,7 @@ import com.maxmind.geoip2.model.CityResponse;
 import com.maxmind.geoip2.model.CountryResponse;
 import com.maxmind.geoip2.record.City;
 import com.maxmind.geoip2.record.Country;
+import com.maxmind.geoip2.record.Location;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,15 +37,25 @@ public class IPResponseManager {
 		InetAddress ipAddress = InetAddress.getByName(resp.getIp());
 
 		CountryResponse countryResponse = client.country(ipAddress);
-		CityResponse cityResponse = client.city();
+		CityResponse cityResponse = client.city(ipAddress);
 
 		Country country = countryResponse.getCountry();
 		City city = cityResponse.getCity();
+		
+		Location location = cityResponse.getLocation();
 
-		resp.setCountry(country.getName());
-		resp.setCity(city.getName());
-//		resp.setLongitude(Double.toString(location.getLongitude()));
-//		resp.setLatitude(Double.toString(location.getLatitude()));
+		if(country.getName() != null) {
+			resp.setCountry(country.getName());
+		}
+		if(city.getName() != null) {
+			resp.setCity(city.getName());
+		}
+		if(location.getLongitude() != null) {
+			resp.setLongitude(Double.toString(location.getLongitude()));
+		}
+		if(location.getLatitude() != null) {
+			resp.setLatitude(Double.toString(location.getLatitude()));
+		}
 
 		return resp;
 	}
