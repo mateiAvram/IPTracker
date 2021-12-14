@@ -1,5 +1,65 @@
 html,body {
-  height: 100%;
+	margin: 0px;
+	height: 100%;
+	padding: 0px;
+}
+
+#info {
+	font-size: 1vw;
+}
+
+#home {
+	font-size:3vw;
+}
+
+#ipAddressText {
+	font-size: 5vw;
+}
+
+#primaryText {
+	font-size: 9vw;
+}
+
+#userIP {
+	font-size: 6vw;
+}
+
+#openMap {
+	width: 10vw;
+	font-size: 1vw;
+}
+
+@media (max-width: 992px) {
+	#ipAddressText {
+		font-size: 20px;
+	}
+	#info {
+	   font-size: 10px;
+	}
+	#userIP {
+		font-size: 22px;
+	}
+	#home {
+		font-size: 15px;
+	}
+	#openMap {
+		width: 100px;
+		font-size: 10px;
+	}
+}
+
+.blur {
+	filter: blur(1px);
+	-webkit-filter: blur(1px);
+}
+#map {
+	height: 30vw;
+	width:100%;
+}
+
+#content {
+	position: absolute;
+	overflow: hidden;
 }
 
 button,

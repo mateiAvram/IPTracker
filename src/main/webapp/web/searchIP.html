@@ -5,132 +5,203 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" type="text/css" href="style/style.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+		<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
 		<title>Your IP Address</title>
-		
-		
+
+
 	</head>
-	
+
 	<style>
-	
+
 	</style>
-	
-	
+
 	<body style = "background-color: #f2f2f2;">
 
-		<div class = "container-fluid d-flex h-100 flex-column">
-		
-			<div class = "row h-100">
-				<div class = "col-4">
-					<h1><a href="index.html" style="text-decoration: none"><span class="display-1 text-danger" style="font-size: 3vw"> IP </span><span class="display-1" style="font-size: 3vw; color: #212529"> - Tracker </span></a></h1>
+			<div class="container-fluid d-flex h-100 flex-column overflow-hidden" style="padding: 1%">
+				<div class="row h-100">
+					<div class="col-2">
+						<div class="row row-cols-1 d-flex h-100">
+							<div class="col d-flex justify-content-left text-nowrap">
+								<h1 id="home"><a href="index.html" style="text-decoration: none;"><span class="text-danger">IP</span><span class="" style="color: #212529">-Tracker </span></a></h1>
+							</div>
+						</div>
+					</div>
+					<div class="col-8">
+						<div class="row row-cols-1 d-flex h-100">
+							<div class="col d-flex justify-content-center" style="height: 40%; align-items: end">
+								<h2 id="ipAddressText"><span class=""> Your </span><span class="text-danger"> IP </span><span class="" style="color: #212529"> Address:</span></h2>
+							</div>
+							<div class="col d-flex justify-content-center" style="align-items: center;">
+					            <h3 id="userIP" style=" color: #212529">80.113.232.19</h3>
+							</div>
+							<div class="col d-flex justify-content-center" style="align-items: start">
+								<p id="info">
+								Latitude: <span><i id="latitude">52.3346</i></span>
+								<br>
+								Longitude: <span><i id="longitude">4.8914</i></span>
+								<br>
+								Country: <span><i id="country">Netherlands</i></span>
+								<br>
+								City: <span><i id="city">Amsterdam</i></span>
+								
+								</p>
+							</div>
+							<div class="col d-flex justify-content-center" style="height: 50%; align-items: start">
+								<button id="openMap" type="button" class="btn btn-danger">
+									Show Map
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-2"></div>
 				</div>
-				<div class = "col-8"></div>
 			</div>
-			<div class = "row h-40"> 
-				<div class = "col"></div>
-				<div class = "col-8">
-					<h2 style = "text-align: center;"> <!-- <span class="display-1" style="font-size: 5vw"> Your </span> --><span class="display-1 text-danger" style="font-size: 5vw"> IP </span><span class="display-1" style="font-size: 5vw"> Address:</span></h2>
-				
-				</div>
-				<div class = "col"></div>
-			</div>
-			
-			<div class="row h-50">
-				<div class="col-2"></div>
-				<div class="col-8 d-flex align-items-start justify-content-center">
-					<h3 id="userIP" style="font-size: 6vw; color: #212529"></h3>
-				</div>
-				<div class="col-2"></div>
-			</div>
-			
-			<div class="row h-100">
-				<div class="col"></div>
-				<div class="col-4 d-flex align-items-start justify-content-center">
-					<p style = "font-size:20px;">
-					Latitude: <span><i id="latitude"></i></span>
-					<br>
-					Longitude: <span><i id="longitude"></i></span>
-					<br>
-					Country: <span><i id="country"></i></span>
-					<br>
-					City: <span><i id="city"></i></span>
-					
-					</p>
-				</div>
-				<div class="col"></div>
-			</div>
-			
-		</div>
+
+
 	</body>
-	
+
+	<div class="modal fade" id="modalMap" tabindex="-1" role="dialog" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalCenterTitle">Map Location</h5>
+	      </div>
+	      <div id="map" class="modal-body">
+
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	
+
 	<script>
-	
+
 		$(document).ready( function() {
-			
+
 			const queryString = window.location.search;
 			const urlParams = new URLSearchParams(queryString);
 			var userIP = urlParams.get('ip');
+
+// 			function getUserIpInfo() {
+
+// 				var userIP = urlParams.get('ip');
+
+// 				var obj ={
+// 						ip : userIP
+// 				}
+
+// 				$.ajax({
+// 					type : "POST",
+// 					url : 'http://localhost:8080/IPTracker/rest/app/getIp',
+// 					dataType : "json",
+// 					contentType : 'application/json',
+// 					data : JSON.stringify(obj),
+// 					error : function() {
+// 						//check for connection errors
+// 						alert("Connection to server error.");
+// 					},
+// 					success : function(resp) {
+
+// 						if (resp.errorCode != 0) {
+
+// 							alert("Server error: " + resp.errorCode + " " + resp.errorMessage);
+
+// 						} else {
+
+// 							var userIP = resp.ip;
+// 							var longitude = resp.longitude;
+// 							var latitude = resp.latitude;
+// 							var country = resp.country;
+// 							var city = resp.city;
+
+// 							$("#userIP").empty();
+// 							$("#userIP").append(userIP);
+
+// 							$("#longitude").empty();
+// 							$("#longitude").append(longitude);
+
+// 							$("#latitude").empty();
+// 							$("#latitude").append(latitude);
+
+// 							$("#country").empty();
+// 							$("#country").append(country);
+
+// 							$("#city").empty();
+// 							$("#city").append(city);
+
+// 							mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja25uYW1kc2EiLCJhIjoiY2t3djliZ2Y5MXhsZjJ3cW9yZ2V6djA2aSJ9.qtxF00aEjHrr6j02jsxFxw';
+// 							var map = new mapboxgl.Map({
+// 								container: 'map',
+// 								style: 'mapbox://styles/mapbox/streets-v11',
+// 								center: [longitude, latitude],
+// 								zoom: 9
+
+
+// 							});
+// 							map.addControl(new mapboxgl.NavigationControl());
+// 							map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
+
+// 							const marker = new mapboxgl.Marker()
+// 							.setLngLat([longitude,latitude])
+// 							.addTo(map);
+
+
+// 						}
+
+// 					}
+
+// 				});
+
+// 			}
 			
-			function getUserIpInfo() {
-				
-				var userIP = urlParams.get('ip');
-				
-				var obj ={
-						ip : userIP
-				}
-				
-				$.ajax({
-					type : "POST",
-					url : 'http://localhost:8080/IPTracker/rest/app/getIp',
-					dataType : "json",
-					contentType : 'application/json',
-					data : JSON.stringify(obj),
-					error : function() {
-						//check for connection errors
-						alert("Connection to server error.");
-					},
-					success : function(resp) {
-						
-						if (resp.errorCode != 0) {
-							
-							alert("Server error: " + resp.errorCode + " " + resp.errorMessage);
-							
-						} else {
-							
-							var userIP = resp.ip;
-							var longitude = resp.longitude;
-							var latitude = resp.latitude;
-							var country = resp.country;
-							var city = resp.city;
-							
-							$("#userIP").empty();
-							$("#userIP").append(userIP);
-							
-							$("#longitude").empty();
-							$("#longitude").append(longitude);
-							
-							$("#latitude").empty();
-							$("#latitude").append(latitude);
-							
-							$("#country").empty();
-							$("#country").append(country);
-							
-							$("#city").empty();
-							$("#city").append(city);
-							
-						}
-					}
-				});
-				
-			}
+// 			In-case there are no more requests allowed for today on the geolocation api
+
+			var longitude = 4.8914;
+			var latitude = 52.3346;
 			
+			mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja25uYW1kc2EiLCJhIjoiY2t3djliZ2Y5MXhsZjJ3cW9yZ2V6djA2aSJ9.qtxF00aEjHrr6j02jsxFxw';
+			var map = new mapboxgl.Map({
+				container: 'map',
+				style: 'mapbox://styles/mapbox/streets-v11',
+				center: [longitude, latitude],
+				zoom: 9
+
+
+			});
+			
+			map.addControl(new mapboxgl.NavigationControl());
+			map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
+
+			const marker = new mapboxgl.Marker()
+			.setLngLat([longitude,latitude])
+			.addTo(map);
+			
+// Here Stops
+
+
+			$("#openMap").click( function () {
+
+				$("#modalMap").modal();
+
+			});
+
+			$("#modalMap").on('shown.bs.modal', function () {
+				
+				map.resize();
+				
+			});
+
 			getUserIpInfo();
-			
+
 		});
-	
+
 	</script>
-	
+
 </html>
